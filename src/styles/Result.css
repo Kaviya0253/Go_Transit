@@ -1,0 +1,315 @@
+/* ---------- Page layout: map on top, bottom sheet slides over it ---------- */
+.trip-page {
+  position: relative;
+  min-height: 100vh;
+}
+
+.trip-map {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  height: 46vh;
+  min-height: 280px;
+}
+
+.trip-back {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 5;
+}
+
+.trip-panel {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: -26px;
+  padding: 10px 16px 40px;
+  min-height: 60vh;
+  background: var(--trip-bg);
+  background-image: var(--trip-sky);
+  border-radius: 26px 26px 0 0;
+  box-shadow: 0 -10px 30px rgba(15, 23, 42, 0.16);
+}
+
+.trip-sheet-handle {
+  align-self: center;
+  width: 42px;
+  height: 5px;
+  margin-bottom: 4px;
+  border-radius: 3px;
+  background: #93c5fd;
+}
+
+/* Children fade up one after another on load */
+.trip-panel > *:not(.trip-sheet-handle) {
+  animation: trip-rise 0.45s ease both;
+}
+.trip-panel > *:nth-child(2) { animation-delay: 0.02s; }
+.trip-panel > *:nth-child(3) { animation-delay: 0.08s; }
+.trip-panel > *:nth-child(4) { animation-delay: 0.14s; }
+.trip-panel > *:nth-child(5) { animation-delay: 0.2s; }
+
+/* ---------- Summary card (ETA / distance / speed) ---------- */
+.trip-summary {
+  padding: 18px;
+}
+
+.trip-summary-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.trip-summary-label {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--trip-muted);
+}
+
+.trip-summary-stop {
+  margin: 2px 0 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.trip-summary-empty {
+  margin: 8px 0 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.trip-tiles {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr 1fr;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.trip-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: 12px;
+  border-radius: 14px;
+  background: #f8fafc;
+  border: 1px solid var(--trip-line);
+}
+
+.trip-tile.is-eta {
+  background: linear-gradient(145deg, var(--trip-primary), var(--trip-primary-dark));
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.3);
+}
+
+.trip-tile-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--trip-muted);
+}
+
+.trip-tile.is-eta .trip-tile-label,
+.trip-tile.is-eta .trip-tile-note {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.trip-tile-value {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.trip-tile-value small {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--trip-muted);
+}
+
+.trip-tile.is-eta .trip-tile-value {
+  font-size: 1.7rem;
+}
+
+.trip-tile.is-eta .trip-skeleton {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.trip-tile-note {
+  font-size: 0.72rem;
+  color: var(--trip-muted);
+}
+
+/* ---------- Link to the calculation page ---------- */
+.trip-details-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid var(--trip-line);
+  border-radius: var(--trip-radius);
+  background: var(--trip-surface);
+  color: var(--trip-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: var(--trip-shadow);
+  transition: transform 0.15s ease, border-color 0.2s ease;
+}
+
+.trip-details-link strong {
+  display: block;
+  font-size: 0.95rem;
+}
+
+.trip-details-link small {
+  color: var(--trip-muted);
+  font-size: 0.8rem;
+}
+
+.trip-details-link svg {
+  color: var(--trip-primary);
+  transition: transform 0.2s ease;
+}
+
+.trip-details-link:hover {
+  border-color: #bfdbfe;
+}
+
+.trip-details-link:hover svg {
+  transform: translateX(3px);
+}
+
+.trip-details-link:active {
+  transform: scale(0.99);
+}
+
+/* ---------- Empty state ---------- */
+.trip-page-empty {
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+}
+
+.trip-empty {
+  max-width: 420px;
+  text-align: center;
+}
+
+.trip-empty h1 {
+  margin: 0 0 6px;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.trip-empty p {
+  margin: 0 0 18px;
+  color: var(--trip-muted);
+}
+
+.trip-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--trip-primary);
+  color: #ffffff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+  transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.trip-primary-btn:hover {
+  background: var(--trip-primary-dark);
+}
+
+.trip-primary-btn:active {
+  transform: scale(0.97);
+}
+
+/* ---------- Small phones ---------- */
+@media (max-width: 380px) {
+  .trip-tiles {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trip-tile.is-eta {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ---------- Tablet / desktop: side panel + full-height map ---------- */
+@media (min-width: 900px) {
+  .trip-page {
+    display: grid;
+    grid-template-columns: minmax(380px, 440px) 1fr;
+    height: 100vh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .trip-map {
+    position: relative;
+    grid-column: 2;
+    grid-row: 1;
+    height: 100vh;
+  }
+
+  .trip-panel {
+    grid-column: 1;
+    grid-row: 1;
+    margin-top: 0;
+    min-height: 0;
+    height: 100vh;
+    padding: 24px 20px 40px;
+    border-radius: 0;
+    overflow-y: auto;
+    box-shadow: 8px 0 30px rgba(15, 23, 42, 0.12);
+  }
+
+  .trip-sheet-handle {
+    display: none;
+  }
+
+  .trip-page.trip-page-empty {
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 100vh;
+    overflow: auto;
+  }
+}
+
+/* Shown in the trip panel while the bus waits at a stop */
+.trip-wait-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 12px 0 4px;
+  padding: 10px 14px;
+  background: #fef2f2;
+  border-left: 4px solid #dc2626;
+  border-radius: 10px;
+  color: #7f1d1d;
+  font-size: 14px;
+}
+
+.trip-wait-banner strong {
+  color: #dc2626;
+}

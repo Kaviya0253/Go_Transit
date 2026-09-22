@@ -1,0 +1,486 @@
+/* Container for the search box */
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 700px;
+  margin-bottom: 330px;
+}
+
+/* From / To card is taller than the search bar: sit below the fixed header
+   and drop the big bottom margins the single search bar needs */
+.search-container.is-planning {
+  align-items: flex-start;
+  /* Real width from the viewport: a % here would shrink to fit its centred flex parent */
+  width: min(100vw - 32px, 720px);
+  margin-top: 110px;
+  margin-bottom: 40px;
+}
+
+/* The input field */
+.search-box {
+  padding: 14px 30px 8px 12px;
+  border: 2px solid transparent; /* No border initially */
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 25px;
+  font-size: 16px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Highlight effect when no input and search is clicked */
+.search-box.highlight {
+  border-color: rgb(243, 116, 116); /* Highlight border */
+  background-color: #fff9f9; /* Light red highlight */
+  box-shadow: 0px 0px 6px rgba(243, 116, 116, 0.5);
+}
+
+/* Error message styling */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  text-align: center;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+
+/* Icon button styling */
+.icon-btn {
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.3s ease-in-out;
+}
+
+/* Search and direction icons */
+.search-btn {
+  right: 70px;
+  color: gray;
+  display: flex;
+  align-items: center;
+}
+
+.direction-btn {
+  display: flex;
+  align-items: center;
+  right: 25px;
+  color: blue;
+}
+
+/* Icon size */
+.search-btn svg, .direction-btn svg {
+  font-size: 20px;
+}
+
+/* Hover effect on icons */
+.icon-btn:hover {
+  color: #007bff; /* Slight blue on hover */
+}
+
+/* ------------------ Responsive Styles ------------------ */
+
+/* Mobile Portrait */
+@media (max-width: 480px) {
+  .search-container {
+    margin-bottom: 430px;
+    width: 100%;
+  }
+
+  .search-box {
+    width: 320px;
+    padding: 8px 30px;
+    font-size: 18px;
+  }
+
+  .search-btn {
+    right: 55px;
+    font-size: small;
+  }
+
+  .direction-btn {
+    right: 20px;
+  }
+
+  .search-btn svg, .direction-btn svg {
+    font-size: 22px;
+  }
+}
+
+/* Mobile Landscape */
+@media (max-width: 768px) and (orientation: landscape) {
+  .search-container {
+    margin-top: 90px;
+    width: 100%;
+  }
+
+  .search-box {
+    width: 480px;
+    padding: 6px 30px;
+    font-size: 14px;
+  }
+
+  .search-btn {
+    right: 40px;
+  }
+
+  .direction-btn {
+    right: 15px;
+  }
+
+  .search-btn svg, .direction-btn svg {
+    font-size: 18px;
+  }
+}
+
+/* Tablet Portrait */
+@media (min-width: 481px) and (max-width: 768px) {
+  .search-container {
+    margin-bottom: 660px;
+    width: 100%;
+  }
+
+  .search-box {
+    width: 600px;
+    padding: 10px 35px;
+    font-size: 18px;
+  }
+
+  .search-btn {
+    right: 60px;
+  }
+
+  .direction-btn {
+    right: 25px;
+  }
+
+  .search-btn svg, .direction-btn svg {
+    font-size: 24px;
+  }
+}
+
+/* Tablet Landscape */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .search-container {
+    margin-bottom: 380px;
+    width: 100%;
+  }
+
+  .search-box {
+    width: 768px;
+    padding: 10px 35px;
+    font-size: 18px;
+  }
+
+  .search-btn {
+    right: 60px;
+  }
+
+  .direction-btn {
+    right: 25px;
+  }
+
+  .search-btn svg, .direction-btn svg {
+    font-size: 24px;
+  }
+}
+
+/* Laptop View */
+@media (min-width: 1025px) {
+  .search-container {
+    margin-top: 10px;
+    width: 700px;
+  }
+
+  .search-box {
+    width: 100%;
+    padding: 14px 30px;
+    font-size: 16px;
+  }
+
+  .search-btn {
+    right: 70px;
+  }
+
+  .direction-btn {
+    right: 25px;
+  }
+
+  .search-btn svg, .direction-btn svg {
+    font-size: 20px;
+  }
+}
+
+/* ------------------ Extras: heading, bus icon, feature pills ------------------ */
+
+/* Room for the fixed header on top, and a bottom gap that scales with the screen
+   height (replaces the fixed 330-660px bottom margins that used to push the bar up) */
+.search-wrap {
+  padding-top: 96px;
+  padding-bottom: clamp(180px, 40vh, 420px);
+}
+
+/* Route form: the card already clears the header on its own */
+.search-wrap.is-planning {
+  padding-top: 0;
+  padding-bottom: 40px;
+}
+
+.search-wrap .search-container:not(.is-planning) {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Heading and pills match the bar's width without making the page wider */
+.search-hero,
+.search-perks {
+  width: 0;
+  min-width: 100%;
+}
+
+.search-hero {
+  margin-bottom: 22px;
+  text-align: center;
+  animation: search-rise 0.55s ease both;
+}
+
+.search-hero-title {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.9rem, 5vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  text-shadow: 0 2px 18px rgba(15, 23, 42, 0.25);
+}
+
+.search-hero-sub {
+  margin: 10px 0 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(0.95rem, 2.4vw, 1.08rem);
+  text-shadow: 0 1px 8px rgba(15, 23, 42, 0.25);
+}
+
+/* Bus icon inside the bar, room left for it and for the two icons on the right */
+.search-wrap .search-box {
+  padding: 14px 96px 14px 52px;
+  max-width: calc(100vw - 32px); /* never wider than the screen */
+}
+
+.search-wrap .search-box:focus {
+  border-color: rgba(37, 99, 235, 0.45);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.45), 0 6px 18px rgba(15, 23, 42, 0.18);
+}
+
+.search-lead-icon {
+  position: absolute;
+  left: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #2563eb;
+  font-size: 1.05rem;
+  pointer-events: none;
+}
+
+/* Round hover halo on the two icons, plus a thin divider between them */
+.search-wrap .icon-btn {
+  border-radius: 50%;
+  transition: color 0.3s ease-in-out, box-shadow 0.2s ease;
+}
+
+.search-wrap .icon-btn:hover {
+  box-shadow: 0 0 0 7px #eff6ff;
+}
+
+.search-wrap .direction-btn::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  width: 1px;
+  height: 22px;
+  background: #e2e8f0;
+  transform: translateY(-50%);
+}
+
+.search-perks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* Lives in .search-slot (below) and fades in when the note is not showing */
+  position: absolute;
+  left: 0;
+  top: -24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s;
+}
+
+.search-perks.is-shown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.search-perks li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-size: 0.84rem;
+  font-weight: 600;
+  text-shadow: 0 1px 6px rgba(15, 23, 42, 0.25);
+}
+
+@keyframes search-rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .search-hero,
+  .search-perks {
+    animation: none;
+  }
+}
+
+/* Shown under the search box while the bus is being looked up */
+.loading-text {
+  color: #475569;
+  font-size: 14px;
+  margin-top: 5px;
+  text-align: center;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+
+/* ------------------ Demo note: shown while typing, pills otherwise ------------------ */
+
+/* Fixed-height slot under the bar, so swapping the note and the pills never moves the
+   page. The top gap leaves room for the red error pill that hangs under the bar. */
+.search-slot {
+  position: relative;
+  width: 0;
+  min-width: 100%; /* same width as the bar, without widening the page */
+  height: 84px;
+  margin-top: 46px;
+}
+
+.search-demo {
+  position: absolute;
+  left: 0;
+  top: -24px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  width: 0;
+  min-width: 100%;
+  padding: 11px 14px;
+  border-left: 4px solid #f59e0b;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.18);
+  color: #1e293b;
+  font-size: 0.88rem;
+  line-height: 1.35;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s, top 0.2s ease;
+}
+
+.search-demo.is-shown {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+/* With the red error pill showing, sit below it */
+.search-wrap.has-error .search-demo {
+  top: 0;
+}
+
+.search-demo-icon {
+  flex: none;
+  color: #f59e0b;
+  font-size: 1.05rem;
+}
+
+.search-demo p {
+  flex: 1 1 200px;
+  margin: 0;
+}
+
+.search-demo-btn {
+  flex: none;
+  margin-left: 0;
+  padding: 7px 16px;
+  border: 0;
+  border-radius: 999px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.search-demo-btn:hover {
+  background: #1d4ed8;
+}
+
+.search-demo-btn:active {
+  transform: scale(0.96);
+}
+
+/* "Searching…" text: a pill under the bar instead of a stray flex item beside it */
+.search-wrap .loading-text {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 8px 0 0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.55);
+  color: #ffffff;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .search-demo {
+    animation: none;
+  }
+}
+
+/* The "Use 101" / "Use 201" buttons sit together on the right of the note */
+.search-demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-left: auto;
+}

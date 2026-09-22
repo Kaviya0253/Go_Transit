@@ -1,0 +1,237 @@
+.stops-card {
+  padding: 18px 14px 10px;
+}
+
+.stops-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 10px;
+  flex-wrap: wrap;
+  padding: 0 6px 6px;
+}
+
+.stops-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.stops-count,
+.stops-empty {
+  font-size: 0.8rem;
+  color: var(--trip-muted);
+}
+
+.stops-empty {
+  margin: 8px 6px 12px;
+}
+
+.stop-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative; /* rows measure their position from here, for auto-scroll */
+  height: 340px; /* fixed size: the heading stays put and only the stops scroll */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+
+.stops-jump {
+  border: 1px solid #bfdbfe;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.stop-row {
+  position: relative;
+}
+
+/* Line down to the next stop: blue = still ahead, grey = already travelled */
+.stop-row:not(.is-last)::before {
+  content: "";
+  position: absolute;
+  left: 21px;
+  top: 50%;
+  height: 100%;
+  width: 3px;
+  margin-left: -1.5px;
+  border-radius: 2px;
+  background: var(--trip-primary);
+  opacity: 0.35;
+}
+
+.stop-row.is-crossed:not(.is-last)::before {
+  background: #cbd5e1;
+  opacity: 1;
+}
+
+/* Bus icon riding on the line between the last passed stop and the next */
+.stop-row.has-bus::after {
+  content: "🚌";
+  position: absolute;
+  left: 21px;
+  top: 100%;
+  z-index: 3;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #ffffff;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.25);
+  pointer-events: none;
+}
+
+.stop-button {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 12px 10px 12px 14px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: transparent;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.stop-button:hover {
+  background: #f8fafc;
+}
+
+.stop-row.is-active .stop-button {
+  background: var(--trip-primary-soft);
+  border-color: #bfdbfe;
+}
+
+.stop-marker {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 15px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid var(--trip-primary);
+  transition: transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.stop-row.is-crossed .stop-marker {
+  background: #cbd5e1;
+  border-color: #cbd5e1;
+}
+
+.stop-row.is-at .stop-marker {
+  background: var(--trip-success);
+  border-color: var(--trip-success);
+  animation: trip-pulse 1.8s ease-out infinite;
+}
+
+.stop-row.is-active .stop-marker {
+  transform: scale(1.25);
+  background: var(--trip-primary);
+}
+
+.stop-row.is-active.is-crossed .stop-marker {
+  background: #94a3b8;
+  border-color: #94a3b8;
+}
+
+.stop-row.is-active.is-at .stop-marker {
+  background: var(--trip-success);
+}
+
+.stop-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.stop-name {
+  font-size: 0.98rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stop-row.is-crossed .stop-name {
+  color: var(--trip-muted);
+  font-weight: 500;
+}
+
+.stop-meta {
+  margin-top: 1px;
+  font-size: 0.8rem;
+  color: var(--trip-muted);
+}
+
+.stop-row.is-at .stop-meta {
+  color: var(--trip-success);
+  font-weight: 600;
+}
+
+.stop-badge {
+  flex: none;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--trip-primary);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* Tells passengers they can pick a stop to track */
+.stops-hint {
+  margin: 4px 6px 10px;
+  padding: 8px 12px;
+  background: #eff6ff;
+  border: 1px dashed #93c5fd;
+  border-radius: 10px;
+  color: #1d4ed8;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.stop-track-hint {
+  margin-left: auto;
+  flex-shrink: 0;
+  padding: 3px 10px;
+  border: 1px solid #bfdbfe;
+  border-radius: 999px;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 600;
+  background: #ffffff;
+}
+
+.stop-button:hover .stop-track-hint {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+
+/* Stops the bus has already passed cannot be tracked */
+.stop-button:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.stop-button:disabled:hover {
+  background: transparent;
+}

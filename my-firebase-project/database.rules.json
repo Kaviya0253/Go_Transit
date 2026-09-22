@@ -1,0 +1,15 @@
+{
+  /* Visit https://firebase.google.com/docs/database/security to learn more about security rules. */
+  "rules": {
+    /* Everything is locked by default. */
+    ".read": false,
+    ".write": false,
+
+    /* The website reads routes and live bus positions directly from Firebase, so anyone may READ
+       them. Nobody may write from the browser: only the backend can (its admin key ignores these rules). */
+    "routes": {
+      ".read": true,
+      ".write": false
+    }
+  }
+}

@@ -1,0 +1,168 @@
+/* Shared look for the trip pages (/result and /result/details) */
+.trip-page,
+.trip-details {
+  --trip-bg: #eaf2ff;
+  /* Same morning sky as the search page, lightened so the white cards stay easy to read:
+     pale blue at the top, a warm sunrise glow low on the right */
+  --trip-sky:
+    radial-gradient(22rem 16rem at 100% 100%, rgba(253, 224, 71, 0.3), transparent 70%),
+    radial-gradient(18rem 8rem at 15% 4%, rgba(255, 255, 255, 0.7), transparent 70%),
+    linear-gradient(180deg, #cfe2ff 0%, #e6f0ff 38%, #f4f8ff 72%, #fff6d6 100%);
+  --trip-surface: #ffffff;
+  --trip-ink: #0f172a;
+  --trip-muted: #5b6b8c;
+  --trip-line: #d3e2fb;
+  --trip-primary: #2563eb;
+  --trip-primary-dark: #1d4ed8;
+  --trip-primary-soft: #eff6ff;
+  --trip-success: #16a34a;
+  --trip-success-soft: #f0fdf4;
+  --trip-warn: #d97706;
+  --trip-warn-soft: #fffbeb;
+  --trip-danger: #dc2626;
+  --trip-danger-soft: #fef2f2;
+  --trip-radius: 18px;
+  --trip-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 8px 24px rgba(15, 23, 42, 0.08);
+
+  width: 100%;
+  background: var(--trip-bg);
+  background-image: var(--trip-sky);
+  color: var(--trip-ink);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+
+.trip-page *,
+.trip-details * {
+  box-sizing: border-box;
+}
+
+/* Logo.css sets a global white h1 for the header; keep page titles dark */
+.trip-page h1,
+.trip-details h1 {
+  color: var(--trip-ink);
+}
+
+/* Round icon button (back, etc.) */
+.trip-icon-btn {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--trip-surface);
+  color: var(--trip-ink);
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.2);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.trip-icon-btn:hover {
+  transform: translateX(-2px);
+}
+
+.trip-icon-btn:active {
+  transform: scale(0.95);
+}
+
+.trip-page :focus-visible,
+.trip-details :focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.45);
+  outline-offset: 2px;
+}
+
+/* Small pill: bus number, start time, live status */
+.trip-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: var(--trip-surface);
+  border: 1px solid var(--trip-line);
+  color: var(--trip-muted);
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.trip-chip.is-bus {
+  background: var(--trip-ink);
+  border-color: var(--trip-ink);
+  color: #ffffff;
+}
+
+.trip-chip .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.trip-chip.is-live {
+  background: var(--trip-success-soft);
+  border-color: #bbf7d0;
+  color: var(--trip-success);
+}
+
+.trip-chip.is-live .dot {
+  animation: trip-pulse 1.8s ease-out infinite;
+}
+
+.trip-chip.is-warn {
+  background: var(--trip-warn-soft);
+  border-color: #fde68a;
+  color: var(--trip-warn);
+}
+
+.trip-chip.is-lost {
+  background: var(--trip-danger-soft);
+  border-color: #fecaca;
+  color: var(--trip-danger);
+}
+
+/* Card surface */
+.trip-card {
+  background: var(--trip-surface);
+  border-radius: var(--trip-radius);
+  box-shadow: var(--trip-shadow);
+  padding: 18px;
+}
+
+/* Loading placeholder for values that are still arriving */
+.trip-skeleton {
+  display: inline-block;
+  width: 3.2em;
+  height: 0.9em;
+  border-radius: 6px;
+  vertical-align: middle;
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  animation: trip-shimmer 1.3s linear infinite;
+}
+
+@keyframes trip-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.5); }
+  70% { box-shadow: 0 0 0 8px rgba(22, 163, 74, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
+}
+
+@keyframes trip-shimmer {
+  to { background-position: -200% 0; }
+}
+
+@keyframes trip-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trip-page *,
+  .trip-details * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

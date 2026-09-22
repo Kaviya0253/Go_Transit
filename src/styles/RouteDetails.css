@@ -1,0 +1,48 @@
+.route-details {
+  padding: 4px 2px 0;
+}
+
+.route-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin: 0;
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--trip-ink);
+}
+
+.route-arrow {
+  color: var(--trip-primary);
+  font-weight: 700;
+}
+
+.route-via {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  color: var(--trip-muted);
+}
+
+.route-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (min-width: 900px) {
+  .route-title {
+    font-size: 1.6rem;
+  }
+}

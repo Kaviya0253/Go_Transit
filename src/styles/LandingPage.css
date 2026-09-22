@@ -1,0 +1,19 @@
+/* Full page container */
+.landing-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: aliceblue; /* Keep color uniform */
+    margin: 0;
+    padding: 0;
+}
+
+/* Remove any default margin/padding */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}

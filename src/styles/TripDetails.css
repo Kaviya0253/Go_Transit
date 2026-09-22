@@ -1,0 +1,221 @@
+.trip-details {
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+/* ---------- Top bar ---------- */
+.detail-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  background: rgba(241, 245, 249, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--trip-line);
+}
+
+.detail-topbar h1 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.detail-topbar p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--trip-muted);
+}
+
+.detail-signal.is-live { color: var(--trip-success); font-weight: 600; }
+.detail-signal.is-warn { color: var(--trip-warn); font-weight: 600; }
+.detail-signal.is-lost { color: var(--trip-danger); font-weight: 600; }
+
+/* ---------- Body ---------- */
+.detail-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 16px;
+  animation: trip-rise 0.4s ease both;
+}
+
+.detail-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 18px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--trip-muted);
+}
+
+.detail-picker select {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid var(--trip-line);
+  border-radius: 12px;
+  background: #f8fafc;
+  color: var(--trip-ink);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  cursor: pointer;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.detail-card {
+  animation: trip-rise 0.45s ease both;
+}
+
+.detail-card:nth-child(2) { animation-delay: 0.05s; }
+.detail-card:nth-child(3) { animation-delay: 0.1s; }
+.detail-card:nth-child(4) { animation-delay: 0.15s; }
+.detail-card:nth-child(5) { animation-delay: 0.2s; }
+.detail-card:nth-child(6) { animation-delay: 0.25s; }
+
+.detail-card h2 {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.detail-blurb {
+  margin: 3px 0 12px;
+  font-size: 0.82rem;
+  color: var(--trip-muted);
+}
+
+.detail-card dl {
+  margin: 0;
+}
+
+.detail-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-top: 1px solid var(--trip-line);
+}
+
+.detail-row dt {
+  font-size: 0.86rem;
+  color: var(--trip-muted);
+}
+
+.detail-row dd {
+  margin: 0;
+  text-align: right;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.detail-row dd small {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--trip-muted);
+}
+
+/* ---------- ETA accuracy ---------- */
+.detail-empty-note {
+  margin: 4px 0 0;
+  padding: 14px;
+  border-radius: 12px;
+  background: #f8fafc;
+  font-size: 0.86rem;
+  color: var(--trip-muted);
+}
+
+.accuracy-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.accuracy-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 0;
+  border-top: 1px solid var(--trip-line);
+}
+
+.accuracy-list strong {
+  display: block;
+  font-size: 0.92rem;
+}
+
+.accuracy-list small {
+  color: var(--trip-muted);
+  font-size: 0.76rem;
+}
+
+.accuracy-pill {
+  flex: none;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: var(--trip-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.accuracy-pill.is-good,
+.accuracy-pill.is-early {
+  background: var(--trip-success-soft);
+  color: var(--trip-success);
+}
+
+.accuracy-pill.is-late {
+  background: var(--trip-warn-soft);
+  color: var(--trip-warn);
+}
+
+/* ---------- Empty state ---------- */
+.trip-details .detail-empty {
+  max-width: 420px;
+  margin: 20vh auto 0;
+  text-align: center;
+}
+
+.detail-empty h1 {
+  margin: 0 0 6px;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.detail-empty p {
+  margin: 0 0 18px;
+  color: var(--trip-muted);
+}
+
+/* ---------- Wider screens ---------- */
+@media (min-width: 720px) {
+  .detail-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .detail-topbar {
+    padding: 14px 32px;
+  }
+}

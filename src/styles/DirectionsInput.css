@@ -1,0 +1,438 @@
+/* From / To route search card */
+.plan-card {
+  --plan-ink: #0f172a;
+  --plan-muted: #64748b;
+  --plan-line: #e2e8f0;
+  --plan-primary: #2563eb;
+  --plan-primary-dark: #1d4ed8;
+  --plan-green: #16a34a;
+  --plan-red: #dc2626;
+
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 auto;
+  padding: 22px;
+  background: #ffffff;
+  border-radius: 22px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 14px 40px rgba(15, 23, 42, 0.14);
+  color: var(--plan-ink);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  animation: plan-rise 0.4s ease both;
+}
+
+.plan-card *,
+.plan-card *::before,
+.plan-card *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Header ---------- */
+.plan-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.plan-back {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: var(--plan-ink);
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.plan-back:hover {
+  background: #e2e8f0;
+  transform: translateX(-2px);
+}
+
+.plan-back:active {
+  transform: scale(0.94);
+}
+
+.plan-title {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.plan-subtitle {
+  margin: 2px 0 0;
+  font-size: 0.85rem;
+  color: var(--plan-muted);
+}
+
+/* ---------- Fields ---------- */
+.plan-fields {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+}
+
+/* Green dot -> dotted line -> red dot, stretches to match the two inputs */
+.plan-rail {
+  flex: none;
+  width: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 19px 0;
+}
+
+.plan-dot {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.plan-dot.is-from {
+  background: var(--plan-green);
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.18);
+}
+
+.plan-dot.is-to {
+  background: var(--plan-red);
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.16);
+}
+
+.plan-line {
+  flex: 1;
+  width: 0;
+  margin: 6px 0;
+  border-left: 2px dotted #cbd5e1;
+}
+
+.plan-inputs {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Google's Autocomplete wraps each input in a div */
+.plan-inputs > div {
+  width: 100%;
+}
+
+.plan-input {
+  width: 100%;
+  height: 50px;
+  padding: 0 14px;
+  border: 1.5px solid var(--plan-line);
+  border-radius: 14px;
+  background: #f8fafc;
+  color: var(--plan-ink);
+  font: inherit;
+  font-size: 1rem;
+  text-overflow: ellipsis;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.plan-input::placeholder {
+  color: #94a3b8;
+}
+
+.plan-input:hover {
+  border-color: #cbd5e1;
+}
+
+.plan-input:focus {
+  outline: none;
+  border-color: var(--plan-primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.14);
+}
+
+.plan-swap {
+  flex: none;
+  align-self: center;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid var(--plan-line);
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--plan-primary);
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.plan-swap svg {
+  transition: transform 0.35s ease;
+}
+
+.plan-swap:hover {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+
+.plan-swap:active {
+  transform: scale(0.92);
+}
+
+/* ---------- Hint + submit ---------- */
+.plan-hint {
+  margin: 12px 0 0;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #fef2f2;
+  color: var(--plan-red);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.plan-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 52px;
+  margin-top: 20px;
+  border: 0;
+  border-radius: 14px;
+  background: linear-gradient(145deg, var(--plan-primary), var(--plan-primary-dark));
+  color: #ffffff;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.32);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.plan-submit svg {
+  transition: transform 0.2s ease;
+}
+
+.plan-submit:hover:not(:disabled) {
+  box-shadow: 0 10px 26px rgba(37, 99, 235, 0.42);
+}
+
+.plan-submit:hover:not(:disabled) svg {
+  transform: translateX(4px);
+}
+
+.plan-submit:active:not(:disabled) {
+  transform: scale(0.985);
+}
+
+.plan-submit:disabled {
+  background: #cbd5e1;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* Searching: stay blue so the spinner and label remain readable */
+.plan-submit[aria-busy="true"]:disabled {
+  background: linear-gradient(145deg, var(--plan-primary), var(--plan-primary-dark));
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.32);
+  cursor: progress;
+  opacity: 0.9;
+}
+
+.plan-card :focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.45);
+  outline-offset: 2px;
+}
+
+/* ---------- Loading ---------- */
+.plan-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--plan-muted);
+  font-weight: 600;
+}
+
+.plan-spinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(148, 163, 184, 0.4);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: plan-spin 0.7s linear infinite;
+}
+
+.plan-submit .plan-spinner {
+  border-color: rgba(255, 255, 255, 0.4);
+  border-top-color: #ffffff;
+}
+
+@keyframes plan-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes plan-rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Google's suggestion dropdown */
+.pac-container {
+  margin-top: 6px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.16);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  overflow: hidden;
+}
+
+.pac-item {
+  padding: 8px 14px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+/* ---------- Small phones ---------- */
+@media (max-width: 480px) {
+  .plan-card {
+    padding: 18px 16px;
+    border-radius: 20px;
+  }
+
+  .plan-title {
+    font-size: 1.15rem;
+  }
+
+  .plan-fields {
+    gap: 8px;
+  }
+
+  .plan-swap {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plan-card,
+  .plan-card * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---------- Demo note (opens smoothly under the button while typing) ---------- */
+.plan-demo {
+  display: grid;
+  grid-template-rows: 0fr;
+  margin-top: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: grid-template-rows 0.3s ease, margin-top 0.3s ease, opacity 0.25s ease, visibility 0.3s;
+}
+
+.plan-demo.is-shown {
+  grid-template-rows: 1fr;
+  margin-top: 14px;
+  opacity: 1;
+  visibility: visible;
+}
+
+.plan-demo-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.plan-demo-box {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  padding: 11px 14px;
+  border-left: 4px solid #f59e0b;
+  border-radius: 12px;
+  background: #fffbeb;
+  color: #1e293b;
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.plan-demo-icon {
+  flex: none;
+  color: #f59e0b;
+  font-size: 1.05rem;
+}
+
+.plan-demo-box p {
+  flex: 1 1 220px;
+  margin: 0;
+}
+
+.plan-demo-btn {
+  flex: none;
+  margin-left: auto;
+  padding: 7px 16px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--plan-primary);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.plan-demo-btn:hover {
+  background: var(--plan-primary-dark);
+}
+
+.plan-demo-btn:active {
+  transform: scale(0.96);
+}
+
+/* One row per demo route: names on the left, its "Use this route" button on the right */
+.plan-demo-body {
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.plan-demo-body p {
+  margin: 0 0 6px;
+}
+
+.plan-demo-route {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  padding: 6px 0;
+}
+
+.plan-demo-route + .plan-demo-route {
+  border-top: 1px dashed rgba(245, 158, 11, 0.4);
+}
+
+.plan-demo-route > span {
+  flex: 1 1 180px;
+}
+
+.plan-demo-route em {
+  margin-left: 4px;
+  color: #92400e;
+  font-size: 0.78rem;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.plan-demo-route .plan-demo-btn {
+  margin-left: auto;
+}

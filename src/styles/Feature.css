@@ -1,0 +1,133 @@
+/* Container */
+.feature-container {
+    text-align: center;
+    padding: 20px;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+/* Heading */
+.feature-heading {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.feature-heading .highlight {
+    font-size: 1.7rem;
+    font-weight: 550;
+    color: #42A5F5;
+}
+
+/* Feature List */
+.feature-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    height: 200px;
+    margin-top: 20px;
+}
+
+/* SVG Curve */
+.curve-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 0;
+}
+
+.curve-path {
+    stroke: #1a1b1b;
+    stroke-width: 0.3;
+    fill: transparent;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+/* Moving Dot */
+.moving-dot {
+    fill: red; /* Default color */
+    stroke: white;
+    stroke-width: 0.5px;
+    filter: drop-shadow(0 0 3px rgba(255, 0, 0, 0.8));
+    r: 2; /* Dot size reduced */
+    transition: fill 0.2s ease-in-out; /* Smooth color change */
+}
+
+/* Feature Items */
+.feature-item {
+    background-color: #E3F2FD;
+    border-radius: 50%;
+    width: 160px;
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    margin: 10px; /* Add spacing */
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Text inside feature items */
+.feature-item p {
+    margin: 0;
+    font-size: 1rem;
+    color: #42A5F5;
+}
+
+/* Mobile & Tablet Portrait */
+@media (max-width: 1024px) and (orientation: portrait) {
+    .feature-heading {
+        text-align: left;
+        font-size: 1.5rem;
+    }
+
+    .feature-list {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        gap: 20px;
+    }
+
+    .feature-item {
+        width: 140px;
+        height: 140px;
+    }
+
+    .curve-line {
+        display: none;
+    }
+}
+
+/* Mobile & Tablet Landscape */
+@media (max-width: 1024px) and (orientation: landscape) {
+    .feature-heading {
+        text-align: left;
+        font-size: 1.5rem;
+    }
+
+    .feature-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        height: auto;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .feature-item {
+        width: 150px;
+        height: 150px;
+        position: relative;
+    }
+
+    .curve-line {
+        display: none;
+    }
+}

@@ -1,0 +1,145 @@
+/* MainContainer Style */
+.main-container {
+    background-color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 90%;
+    margin-top: 84px; /* Retain the top margin for laptop and larger screens */
+    gap: 90px;
+    flex-direction: column; /* Default to column layout for smaller screens */
+}
+
+/* Image Container */
+.Image_container {
+    width: 450px;
+    height: 450px;
+    border-radius: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.Image_container img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+}
+
+/* Text Container */
+.Text_container {
+    width: 450px;
+    height: auto;
+    text-align: left; /* Keep text left-aligned */
+}
+
+/* Slogan Text Style */
+.slogon {
+    color: #42A5F5;
+    font-weight: 550;
+    font-size: 2rem; /* Default size */
+}
+
+/* Button Styles */
+.try-transit-button {
+    text-align: center;
+    background-color: #42A5F5; /* Blue background color */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    padding: 4px 20px; /* Adjust padding for smaller height */
+    font-size: 1rem; /* Default font size */
+    font-weight: bold; /* Bold font */
+    border-radius: 5px; /* Slightly rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    height: 35px; /* Directly set height for button */
+    line-height: 35px; /* Vertically center text within the button */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Button Hover Effect */
+.try-transit-button:hover {
+    background-color: #1E88E5; /* Darker blue when hovered */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Media query for screens larger than 1024px (Laptop view) */
+@media (min-width: 1024px) {
+    .main-container {
+        flex-direction: row; /* Side-by-side layout */
+    }
+
+    .Text_container {
+        text-align: left; /* Keep text left-aligned */
+    }
+
+    .try-transit-button {
+        font-size: 1.2rem; /* Slightly larger font size */
+        padding: 6px 24px; /* Slightly larger padding */
+        height: 40px; /* Increase height for larger screens */
+        line-height: 40px; /* Vertically center text */
+    }
+}
+
+/* Media query for tablet view (screens smaller than 768px) */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column; /* Stack content vertically */
+        gap: 20px; /* Reduce gap */
+        margin-top: 62px; /* Remove top margin for tablet view */
+    }
+
+    .Image_container {
+        width: 300px;
+        height: 300px;
+    }
+
+    .Text_container {
+        width: 90%;
+        text-align: left;
+    }
+
+    .slogon {
+        font-size: 1.5rem; /* Reduce slogan size for tablets */
+    }
+
+    .try-transit-button {
+        font-size: 1rem; /* Default font size */
+        padding: 4px 20px; /* Smaller padding */
+        height: 35px; /* Set height for tablet */
+        line-height: 35px; /* Vertically center text */
+    }
+}
+
+/* Media query for mobile view (screens smaller than 480px) */
+@media (max-width: 480px) {
+    .main-container {
+        margin-top:48px; /* Remove top margin for mobile view */
+    }
+
+    .Image_container {
+        width: 200px;
+        height: 200px;
+    }
+
+    .Text_container {
+        width: 100%;
+        text-align: left;
+    }
+
+    .slogon {
+        font-size: 1.3rem; /* Reduce slogan size further for mobile */
+    }
+
+    .try-transit-button {
+        font-size: 0.9rem; /* Smaller font size for mobile */
+        padding: 4px 16px; /* Reduced padding for mobile */
+        height: 30px; /* Reduced height for mobile */
+        line-height: 30px; /* Vertically center text */
+    }
+}
