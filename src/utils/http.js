@@ -1,7 +1,8 @@
 // fetch() that gives up after a while. Without this, a slow or unreachable backend leaves the
 // page on "Searching…" forever with no message.
+// The default wait is long on purpose: free hosting (Render) sleeps when idle and can take up to a minute to wake up.
 
-export const fetchWithTimeout = (url, { timeoutMs = 10000, signal, ...options } = {}) => {
+export const fetchWithTimeout = (url, { timeoutMs = 75000, signal, ...options } = {}) => {
   const controller = new AbortController();
   const timer = setTimeout(
     () => controller.abort(new DOMException("The server took too long to respond", "TimeoutError")),
