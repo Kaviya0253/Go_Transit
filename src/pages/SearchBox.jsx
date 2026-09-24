@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -24,6 +24,17 @@ const SearchBox = () => {
   const [focused, setFocused] = useState(false);
   const navigate = useNavigate();
   const inputRef = useRef(null);
+
+  // After a few seconds of waiting, tell the visitor the free server is waking up
+  const [slow, setSlow] = useState(false);
+  useEffect(() => {
+    if (!isLoading) {
+      setSlow(false);
+      return;
+    }
+    const timer = setTimeout(() => setSlow(true), 6000);
+    return () => clearTimeout(timer);
+  }, [isLoading]);
 
   // The demo note only appears once someone starts typing (or has typed something),
   // and goes away again as soon as one of the demo buses is in the box
@@ -122,7 +133,7 @@ const SearchBox = () => {
             </button>
 
             {error && <p className="error-message">{error}</p>}
-            {isLoading && <p className="loading-text">Searching…</p>}
+            {isLoading && <p className="loading-text">{slow ? "Waking up the server (free hosting sleeps when idle). This can take up to a minute…" : "Searching…"}</p>}
           </>
         ) : (
           <DirectionInput onClose={() => setShowDirections(false)} />
